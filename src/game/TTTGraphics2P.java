@@ -47,12 +47,11 @@ public class TTTGraphics2P extends JFrame {
 	private DrawCanvas canvas;
 	private static JLabel statusBar;
 
-	// ------------------------------------------------------------------------
 	public TTTGraphics2P() {
-		canvas = new DrawCanvas(); // Construct a drawing canvas (a JPanel)
+		canvas = new DrawCanvas(); 
 		canvas.setPreferredSize(new Dimension(CANVAS_WIDTH, CANVAS_HEIGHT));
 
-		// The canvas (JPanel) fires a MouseEvent upon mouse-click
+		
 		canvas.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) { // mouse-clicked handler
@@ -126,10 +125,10 @@ public class TTTGraphics2P extends JFrame {
 	public void updateGame(Seed theSeed, int rowSelected, int colSelected) {
 		if (hasWon(theSeed, rowSelected, colSelected)) { // check for win
 			currentState = (theSeed == Seed.CROSS) ? GameState.CROSS_WON : GameState.NOUGHT_WON;
-		} else if (isDraw()) { // check for draw
+		} else if (isDraw()) { 
 			currentState = GameState.DRAW;
 		}
-		// Otherwise, no change to current state (still GameState.PLAYING).
+		
 	}
 
 	/** Return true if it is a draw (i.e., no more empty cell) */
@@ -141,7 +140,7 @@ public class TTTGraphics2P extends JFrame {
 				}
 			}
 		}
-		return true; // no more empty cell, it's a draw
+		return true; 
 	}
 
 	/**
@@ -157,17 +156,6 @@ public class TTTGraphics2P extends JFrame {
 						&& board[0][0] == theSeed && board[1][1] == theSeed && board[2][2] == theSeed
 				|| rowSelected + colSelected == 2 // 3-in-the-opposite-diagonal
 						&& board[0][2] == theSeed && board[1][1] == theSeed && board[2][0] == theSeed);
-	}
-	// ===================================================================
-
-	public static void main(String[] args) {
-		// Run GUI codes in the Event-Dispatching thread for thread safety
-		SwingUtilities.invokeLater(new Runnable() {
-			@Override
-			public void run() {
-				new TTTGraphics2P(); // Let the constructor do the job
-			}
-		});
 	}
 
 }
